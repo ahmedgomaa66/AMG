@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">أحمد محمد جمعة | مشغل محطة خرسانة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Cairo',sans-serif;line-height:1.6;color:#333;background:#f4f4f4}
+        .lang-btn{position:fixed;top:20px;left:20px;background:#c9a227;color:#1a365d;border:none;padding:10px 20px;border-radius:20px;cursor:pointer;font-weight:700;z-index:1000}
+        html[dir="ltr"] .lang-btn{left:auto;right:20px}
+        .container{max-width:800px;margin:0 auto;padding:20px}
+        header{background:linear-gradient(135deg,#1a365d,#2c5282);color:#fff;padding:40px 20px;text-align:center;border-radius:0 0 30px 30px;margin-top:20px}
+        .profile-img{width:150px;height:150px;border-radius:50%;border:4px solid #c9a227;margin-bottom:15px}
+        h1{font-size:2rem;margin-bottom:10px}
+        .title{color:#c9a227;font-size:1.1rem}
+        .section{background:#fff;margin:20px 0;padding:25px;border-radius:15px;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+        h2{color:#1a365d;border-bottom:3px solid #c9a227;padding-bottom:10px;margin-bottom:20px}
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
+        .info-item{background:#f8f9fa;padding:15px;border-radius:10px;border-right:4px solid #c9a227}
+        html[dir="ltr"] .info-item{border-right:none;border-left:4px solid #c9a227}
+        .info-item h3{color:#1a365d;font-size:0.9rem;margin-bottom:5px}
+        .info-item p{color:#666;font-size:0.9rem}
+        .skills{display:flex;flex-wrap:wrap;gap:10px}
+        .skill{background:#1a365d;color:#fff;padding:8px 15px;border-radius:20px;font-size:0.85rem}
+        .contact-info{text-align:center}
+        .contact-info a{color:#1a365d;text-decoration:none;font-weight:700;font-size:1.1rem;display:block;margin:10px 0}
+        .contact-info a:hover{color:#c9a227}
+        .btn{display:inline-block;background:#c9a227;color:#1a365d;padding:12px 30px;border-radius:25px;text-decoration:none;font-weight:700;margin-top:15px}
+        .btn:hover{background:#b8941f}
+        footer{text-align:center;padding:20px;color:#666;font-size:0.9rem}
+        @media(max-width:600px){h1{font-size:1.5rem}.profile-img{width:120px;height:120px}}
+    </style>
+</head>
+<body>
+    <button class="lang-btn" onclick="toggleLang()" id="lang-btn">English</button>
+
+    <header>
+        <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img">
+        <h1 id="name">أحمد محمد جمعة</h1>
+        <div class="title" id="job">مشغل محطة خرسانة مركزية</div>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2 id="about-title">نبذة عني</h2>
+            <p id="about-text">أعمل كمشغل محطة خرسانة مركزية بخبرة 4 سنوات في مجال الإنشاءات. أجيد استخدام برامج MRM Protek وVURMAK وDorner. أبحث عن فرصة عمل في الإمارات.</p>
+        </div>
+
+        <div class="section">
+            <h2 id="skills-title">المهارات</h2>
+            <div class="skills" id="skills">
+                <span class="skill">MRM Protek</span>
+                <span class="skill">VURMAK</span>
+                <span class="skill">Dorner</span>
+                <span class="skill"></span>
+                <span class="skill" id="skill1">صيانة ميكانيكية</span>
+                <span class="skill" id="skill2">صيانة كهربائية</span>
+                <span class="skill" id="skill3">أنظمة الري</span>
+                <span class="skill" id="skill4">السباكة</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 id="exp-title">الخبرات</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h3 id="exp1-title">مشرف موقع ومشغل محطة خرسانة</h3>
+                    <p id="exp1-comp">Quicrete Ready Mix - 2022 - 2024</p>
+                </div>
+                <div class="info-item">
+                    <h3 id="exp2-title">مشغل محطة خرسانة</h3>
+                    <p id="exp2-comp">Quicrete Ready Mix - 2021-2022</p>
+                </div>
+                <div class="info-item">
+                    <h3 id="exp3-title">فني شبكات ري</h3>
+                    <p id="exp3-comp">الشركة الوطنية - 2013-2020</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 id="contact-title">تواصل معي</h2>
+            <div class="contact-info">
+                <a href="tel:+971504426398">📞 +971 50 442 6398</a>
+                <a href="mailto:toshkawy22@gmail.com">📧 toshkawy22@gmail.com</a>
+                <a href="https://www.linkedin.com/in/ahmed-mohamed-gomaa-a28573226" target="_blank">💼 LinkedIn</a>
+                <br>
+                <a href="Ahmed_Gomaa_CV.pdf" download class="btn" id="cv-btn">تحميل السيرة الذاتية</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p id="footer">الإمارات العربية المتحدة الفجيرة | 2024</p>
+    </footer>
+
+    <script>
+        const data = {
+            ar: {
+                title: "أحمد محمد جمعة | مشغل محطة خرسانة",
+                name: "أحمد محمد جمعة",
+                job: "مشغل محطة خرسانة مركزية",
+                aboutTitle: "نبذة عني",
+                aboutText: "أعمل كمشغل محطة خرسانة مركزية بخبرة 4 سنوات في مجال الإنشاءات. أجيد استخدام برامج MRM Protek وVURMAK وDorner. أبحث عن فرصة عمل في الإمارات.",
+                skillsTitle: "المهارات",
+                skill1: "صيانة ميكانيكية", skill2: "صيانة كهربائية", skill3: "أنظمة الري", skill4: "السباكة",
+                expTitle: "الخبرات",
+                exp1Title: "مشرف محطة خرسانة", exp1Comp: "Quicrete Ready Mix - 2022 حتى الآن",
+                exp2Title: "مشغل محطة خرسانة", exp2Comp: "Quicrete Ready Mix - 2021-2022",
+                exp3Title: "فني شبكات ري", exp3Comp: "الشركة الوطنية - 2013-2020",
+                contactTitle: "تواصل معي",
+                cvBtn: "تحميل السيرة الذاتية",
+                footer: "الإمارات العربية المتحدة الفجيرة | 2024",
+                btn: "English"
+            },
+            en: {
+                title: "Ahmed Mohamed Gomaa | Concrete Plant Operator",
+                name: "Ahmed Mohamed Gomaa",
+                job: "Central Concrete Plant Operator",
+                aboutTitle: "About Me",
+                aboutText: "I am a central concrete plant operator with 4 years of experience in construction. Proficient in MRM Protek, VURMAK, Dorner software. Looking for job opportunities in UAE.",
+                skillsTitle: "Skills",
+                skill1: "Mechanical Maintenance", skill2: "Electrical Maintenance", skill3: "Irrigation Systems", skill4: "Plumbing",
+                expTitle: "Experience",
+                exp1Title: "Concrete Plant Operator And Supervisor", exp1Comp: "Quicrete Ready Mix - 2022 - 2024",
+                exp2Title: "Concrete Plant Operator", exp2Comp: "Quicrete Ready Mix - 2021-2022",
+                exp3Title: "Irrigation Networks Tech", exp3Comp: "National Company - 2013-2020",
+                contactTitle: "Contact Me",
+                cvBtn: "Download CV",
+                footer: "United Arab Emirates Fujairah | 2024",
+                btn: "العربية"
+            }
+        };
+        let lang = 'ar';
+        function toggleLang() {
+            lang = lang === 'ar' ? 'en' : 'ar';
+            const d = data[lang];
+            document.getElementById('html').setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+            document.getElementById('html').setAttribute('lang', lang);
+            document.getElementById('page-title').textContent = d.title;
+            document.getElementById('lang-btn').textContent = d.btn;
+            document.getElementById('name').textContent = d.name;
+            document.getElementById('job').textContent = d.job;
+            document.getElementById('about-title').textContent = d.aboutTitle;
+            document.getElementById('about-text').textContent = d.aboutText;
+            document.getElementById('skills-title').textContent = d.skillsTitle;
+            document.getElementById('skill1').textContent = d.skill1;
+            document.getElementById('skill2').textContent = d.skill2;
+            document.getElementById('skill3').textContent = d.skill3;
+            document.getElementById('skill4').textContent = d.skill4;
+            document.getElementById('exp-title').textContent = d.expTitle;
+            document.getElementById('exp1-title').textContent = d.exp1Title;
+            document.getElementById('exp1-comp').textContent = d.exp1Comp;
+            document.getElementById('exp2-title').textContent = d.exp2Title;
+            document.getElementById('exp2-comp').textContent = d.exp2Comp;
+            document.getElementById('exp3-title').textContent = d.exp3Title;
+            document.getElementById('exp3-comp').textContent = d.exp3Comp;
+            document.getElementById('contact-title').textContent = d.contactTitle;
+            document.getElementById('cv-btn').textContent = d.cvBtn;
+            document.getElementById('footer').textContent = d.footer;
+        }
+    </script>
+</body>
+</html>
