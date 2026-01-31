@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أذكار الصباح والمساء</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Cairo',sans-serif;background:linear-gradient(135deg,#1a365d,#2c5282);min-height:100vh;padding:20px;color:#fff}
+        .container{max-width:600px;margin:0 auto}
+        header{text-align:center;padding:30px 0}
+        h1{font-size:2rem;margin-bottom:10px;color:#c9a227}
+        .date{font-size:1rem;opacity:0.9}
+        .tabs{display:flex;gap:10px;margin-bottom:20px;background:rgba(255,255,255,0.1);padding:5px;border-radius:15px}
+        .tab{flex:1;padding:12px;border:none;background:transparent;color:#fff;font-family:'Cairo',sans-serif;font-size:1rem;cursor:pointer;border-radius:10px;transition:all 0.3s}
+        .tab.active{background:#c9a227;color:#1a365d;font-weight:700}
+        .content{display:none}
+        .content.active{display:block}
+        .progress{background:rgba(255,255,255,0.1);padding:15px;border-radius:15px;margin-bottom:20px;text-align:center}
+        .progress-bar{width:100%;height:10px;background:rgba(255,255,255,0.2);border-radius:5px;margin:10px 0;overflow:hidden}
+        .progress-fill{height:100%;background:#c9a227;border-radius:5px;transition:width 0.3s}
+        .zekr-card{background:rgba(255,255,255,0.95);color:#1a365d;padding:20px;border-radius:15px;margin-bottom:15px;cursor:pointer;transition:all 0.3s;border-right:5px solid #c9a227;position:relative}
+        .zekr-card:hover{transform:translateX(-5px);box-shadow:0 5px 20px rgba(0,0,0,0.2)}
+        .zekr-card.completed{opacity:0.6;border-right-color:#38a169}
+        .zekr-text{font-size:1.1rem;line-height:1.8;margin-bottom:10px}
+        .zekr-info{display:flex;justify-content:space-between;align-items:center;font-size:0.9rem;color:#666}
+        .count{background:#1a365d;color:#fff;padding:5px 15px;border-radius:20px;font-weight:700}
+        .count.completed{background:#38a169}
+        .reset-btn{width:100%;padding:15px;background:#e53e3e;color:#fff;border:none;border-radius:10px;font-family:'Cairo',sans-serif;font-size:1rem;cursor:pointer;margin-top:20px;transition:all 0.3s}
+        .reset-btn:hover{background:#c53030}
+        .back-btn{display:inline-block;background:#c9a227;color:#1a365d;padding:10px 25px;border-radius:25px;text-decoration:none;font-weight:700;margin-bottom:20px;transition:all 0.3s}
+        .back-btn:hover{background:#d4af37;transform:scale(1.05)}
+        @media(max-width:600px){h1{font-size:1.5rem}.zekr-text{font-size:1rem}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">⬅️ رجوع للموقع</a>
+        <header>
+            <h1>📿 أذكار الصباح والمساء</h1>
+            <div class="date" id="currentDate"></div>
+        </header>
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('morning')">☀️ الصباح</button>
+            <button class="tab" onclick="switchTab('evening')">🌙 المساء</button>
+        </div>
+        <div id="morning" class="content active">
+            <div class="progress">
+                <div>التقدم: <span id="morningProgress">0</span>%</div>
+                <div class="progress-bar"><div class="progress-fill" id="morningBar" style="width:0%"></div></div>
+            </div>
+            <div id="morningAzkar"></div>
+            <button class="reset-btn" onclick="resetAll('morning')">🔄 إعادة ضبط</button>
+        </div>
+        <div id="evening" class="content">
+            <div class="progress">
+                <div>التقدم: <span id="eveningProgress">0</span>%</div>
+                <div class="progress-bar"><div class="progress-fill" id="eveningBar" style="width:0%"></div></div>
+            </div>
+            <div id="eveningAzkar"></div>
+            <button class="reset-btn" onclick="resetAll('evening')">🔄 إعادة ضبط</button>
+        </div>
+    </div>
+    <script>
+        const morningAzkar=[
+            {text:"أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",count:1,current:0},
+            {text:"اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ",count:1,current:0},
+            {text:"اللَّهُمَّ مَا أَصْبَحَ بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ",count:1,current:0},
+            {text:"اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا",count:1,current:0},
+            {text:"أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",count:3,current:0},
+            {text:"بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ",count:3,current:0},
+            {text:"رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا",count:3,current:0},
+            {text:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ: عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ",count:3,current:0},
+            {text:"حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ",count:7,current:0},
+            {text:"لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ",count:100,current:0}
+        ];
+        const eveningAzkar=[
+            {text:"أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",count:1,current:0},
+            {text:"اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ",count:1,current:0},
+            {text:"اللَّهُمَّ مَا أَمْسَى بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ",count:1,current:0},
+            {text:"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",count:3,current:0},
+            {text:"بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ",count:3,current:0},
+            {text:"رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا",count:3,current:0},
+            {text:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",count:100,current:0},
+            {text:"لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",count:10,current:0},
+            {text:"أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ",count:100,current:0}
+        ];
+        function loadData(){
+            const savedMorning=localStorage.getItem('morningAzkar');
+            const savedEvening=localStorage.getItem('eveningAzkar');
+            if(savedMorning){const parsed=JSON.parse(savedMorning);morningAzkar.forEach((z,i)=>{if(parsed[i])z.current=parsed[i].current})}
+            if(savedEvening){const parsed=JSON.parse(savedEvening);eveningAzkar.forEach((z,i)=>{if(parsed[i])z.current=parsed[i].current})}
+        }
+        function saveData(){localStorage.setItem('morningAzkar',JSON.stringify(morningAzkar));localStorage.setItem('eveningAzkar',JSON.stringify(eveningAzkar))}
+        function renderAzkar(type){
+            const container=document.getElementById(type+'Azkar');
+            const azkar=type==='morning'?morningAzkar:eveningAzkar;
+            container.innerHTML=azkar.map((z,i)=>`<div class="zekr-card ${z.current>=z.count?'completed':''}" onclick="increment('${type}',${i})"><div class="zekr-text">${z.text}</div><div class="zekr-info"><span>اضغط للعد</span><span class="count ${z.current>=z.count?'completed':''}">${z.current}/${z.count}</span></div></div>`).join('');
+            updateProgress(type);
+        }
+        function increment(type,index){
+            const azkar=type==='morning'?morningAzkar:eveningAzkar;
+            if(azkar[index].current<azkar[index].count){azkar[index].current++;saveData();renderAzkar(type)}
+        }
+        function updateProgress(type){
+            const azkar=type==='morning'?morningAzkar:eveningAzkar;
+            const total=azkar.reduce((s,z)=>s+z.count,0);
+            const current=azkar.reduce((s,z)=>s+z.current,0);
+            const p=Math.round((current/total)*100);
+            document.getElementById(type+'Progress').textContent=p;
+            document.getElementById(type+'Bar').style.width=p+'%';
+        }
+        function switchTab(type){
+            document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+            document.querySelectorAll('.content').forEach(c=>c.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(type).classList.add('active');
+        }
+        function resetAll(type){if(confirm('هل تريد إعادة ضبط العداد؟')){const azkar=type==='morning'?morningAzkar:eveningAzkar;azkar.forEach(z=>z.current=0);saveData();renderAzkar(type)}}
+        function setDate(){const options={weekday:'long',year:'numeric',month:'long',day:'numeric'};document.getElementById('currentDate').textContent=new Date().toLocaleDateString('ar-SA',options)}
+        loadData();setDate();renderAzkar('morning');renderAzkar('evening');
+    </script>
+</body>
+</html>
